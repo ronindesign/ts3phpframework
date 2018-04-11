@@ -13,7 +13,7 @@
 >
   <testsuites>
     <testsuite name="Teamspeak 3 PHP Framework Test Suite">
-      <directory>./Tests/</directory>
+      <directory>./tests/</directory>
     </testsuite>
   </testsuites>
 
