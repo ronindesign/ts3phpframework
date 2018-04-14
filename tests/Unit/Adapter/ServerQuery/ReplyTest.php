@@ -48,12 +48,28 @@ class ReplyTest extends TestCase
       new \TeamSpeak3_Helper_String(static::$S_SERVERLIST),
       new \TeamSpeak3_Helper_String(static::$S_ERROR_OK)
     ]);
-    $this->assertEquals(static::$E_SERVERLIST, (string)$reply->toString());
+    $replyString = $reply->toString();
+    $this->assertInstanceOf(\TeamSpeak3_Helper_String::class, $replyString);
+    $replyString = (string) $replyString;
+    $this->assertInternalType(PHPUnit_IsType::TYPE_STRING, $replyString);
+    $this->assertEquals(static::$E_SERVERLIST, $replyString);
   }
   
   public function testToLines() {
+    $reply = new \TeamSpeak3_Adapter_ServerQuery_Reply([
+      new \TeamSpeak3_Helper_String(static::$S_SERVERLIST),
+      new \TeamSpeak3_Helper_String(static::$S_ERROR_OK)
+    ]);
+    $replyLines = $reply->toLines();
+    $this->assertInternalType(PHPUnit_IsType::TYPE_ARRAY, $replyLines);
+    $this->assertEquals(static::$E_SERVERLIST, $replyLines);
   }
   public function testToTable() {
+    $reply = new \TeamSpeak3_Adapter_ServerQuery_Reply([
+      new \TeamSpeak3_Helper_String(static::$S_SERVERLIST),
+      new \TeamSpeak3_Helper_String(static::$S_ERROR_OK)
+    ]);
+    $this->assertEquals(static::$E_SERVERLIST, (string)$reply->toString());
   }
   public function testToArray() {
   }
