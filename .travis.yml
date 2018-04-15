@@ -34,7 +34,7 @@ cache:
     - $HOME/.php-cs-fixer
 
 before_install:
-  - docker run -d --name="teamspeak_server" -p "9987:9987/udp" -p 10011:10011 -p 30033:30033 teamspeak:latest
+  - docker run -d --name="teamspeak_server" -p "9987:9987/udp" -p 10011:10011 -p 30033:30033 -e TS3SERVER_LICENSE=accept teamspeak:latest
   - docker ps -a
   - docker logs teamspeak_server
   - if [[ $TRAVIS_PHP_VERSION != hhvm && $TRAVIS_PHP_VERSION != nightly && $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi
