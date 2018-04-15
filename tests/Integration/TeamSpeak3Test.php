@@ -32,7 +32,7 @@ class TeamSpeak3Test extends TestCase
   
   public function testConstructorExceptionBadHost() {
     $this->expectException(\TeamSpeak3_Transport_Exception::class);
-    $this->expectExceptionMessage('php_network_getaddresses: getaddrinfo failed: nodename nor servname provided, or not known');
+    $this->expectExceptionMessageRegExp('/getaddrinfo failed/');
     
     $ts3host = \TeamSpeak3::factory(static::$URI_SCHEME . '://TestBadHost' 
       . ':' . static::$PORT['server_query'] . '/');
