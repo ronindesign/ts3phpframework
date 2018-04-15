@@ -96,6 +96,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
    */
   public function toString()
   {
+    // @todo: Replace magic `func_num_args` overload with argument
     return (!func_num_args()) ? $this->rpl->unescape() : $this->rpl;
   }
 
@@ -107,7 +108,8 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
   public function toLines()
   {
     if(!count($this->rpl)) return array();
-
+  
+    // @todo: Replace magic `func_num_args` overload with argument
     $list = $this->toString(0)->split(TeamSpeak3::SEPARATOR_LIST);
 
     if(!func_num_args())
@@ -126,7 +128,8 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
   public function toTable()
   {
     $table = array();
-
+  
+    // @todo: Replace magic `func_num_args` overload with argument
     foreach($this->toLines(0) as $cells)
     {
       $pairs = $cells->split(TeamSpeak3::SEPARATOR_CELL);
@@ -150,6 +153,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
   public function toArray()
   {
     $array = array();
+    // @todo: Replace magic `func_num_args` overload with argument
     $table = $this->toTable(1);
 
     for($i = 0; $i < count($table); $i++)
@@ -168,7 +172,8 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
         else
         {
           list($ident, $value) = $pair->split(TeamSpeak3::SEPARATOR_PAIR, 2);
-
+  
+          // @todo: Replace magic `func_num_args` overload with argument
           $array[$i][$ident->toString()] = $value->isInt() ? $value->toInt() : (!func_num_args() ? $value->unescape() : $value);
         }
       }
@@ -186,6 +191,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
    */
   public function toAssocArray($ident)
   {
+    // @todo: Replace magic `func_num_args` overload with argument
     $nodes = (func_num_args() > 1) ? $this->toArray(1) : $this->toArray();
     $array = array();
 
@@ -206,11 +212,13 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
 
   /**
    * Returns an array containing the reply splitted in multiple rows and columns.
+   * @todo: Is seems like alias for `toArray()`. If no value added, remove it.
    *
    * @return array
    */
   public function toList()
   {
+    // @todo: Replace magic `func_num_args` overload with argument
     $array = func_num_args() ? $this->toArray(1) : $this->toArray();
 
     if(count($array) == 1)
@@ -228,6 +236,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
    */
   public function toObjectArray()
   {
+    // @todo: Replace magic `func_num_args` overload with argument
     $array = (func_num_args() > 1) ? $this->toArray(1) : $this->toArray();
 
     for($i = 0; $i < count($array); $i++)
