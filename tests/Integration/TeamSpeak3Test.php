@@ -4,6 +4,7 @@ namespace Tests\System;
 
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Constraint\IsType as PHPUnit_IsType;
+use PHPUnit\Framework\Exception;
 
 require_once 'lib/TeamSpeak3/TeamSpeak3.php';
 
@@ -18,12 +19,24 @@ require_once 'lib/TeamSpeak3/TeamSpeak3.php';
 class TeamSpeak3Test extends TestCase
 {
   protected static $URI_SCHEME = 'serverquery';
+  protected static $USERNAME = 'serveradmin';
+  protected static $PASSWORD = '';
   protected static $HOSTNAME = '127.0.0.1';
   protected static $PORT = [
-    'server_query' => '10011'
+    'server_query' => '10011',
+    'voice' => '9987'
   ];
   
-  public function testConstructor() {
+  protected function setUp(
+  )/* The :void return type declaration that should be here would cause a BC issue */ {
+    parent::setUp();
+    if(!static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD'))
+    {
+      throw new Exception('Integration tests require `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable be set, but was either not set or empty.');
+    }
+  }
+  
+  public function testConstructorHost() {
     $ts3host = \TeamSpeak3::factory(static::$URI_SCHEME . '://' 
       . static::$HOSTNAME . ':' . static::$PORT['server_query'] . '/');
     $this->assertInstanceOf(\TeamSpeak3_Node_Host::class,
@@ -50,4 +63,19 @@ class TeamSpeak3Test extends TestCase
       $ts3host);
   }
   
+  public function testConstructorVirtualServer() {
+    $ts3host = \TeamSpeak3::factory(static::$URI_SCHEME . '://'
+      . static::$HOSTNAME . ':' . static::$PORT['server_query']
+      . '/?server_port=' . static::$PORT['voice']);
+    $this->assertInstanceOf(\TeamSpeak3_Node_Server::class,
+      $ts3host);
+  }
+  
+  public function testConstructorVirtualServerLogin() {
+    $ts3host = \TeamSpeak3::factory(static::$URI_SCHEME . '://'
+      . static::$USERNAME . ':' . static::$PASSWORD . '@'
+      . static::$HOSTNAME . ':' . static::$PORT['server_query'] . '/?server_port=' . static::$PORT['voice']);
+    $this->assertInstanceOf(\TeamSpeak3_Node_Server::class,
+      $ts3host);
+  }
 }
