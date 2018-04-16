@@ -76,6 +76,7 @@ class UriTest extends TestCase
   
   public function testParseURI() {
     // @todo: No reachable path results in error. Implement if found.
+    $this->markTestIncomplete();
   }
   
   public function testCheckUser() {
@@ -132,10 +133,12 @@ class UriTest extends TestCase
   
   public function testCheckHost() {
     // @todo: Implement after checkHost() validation implemented
+    $this->markTestIncomplete();
   }
   
   public function testCheckPort() {
     // @todo: Implement after checkPort() validation implemented
+    $this->markTestIncomplete();
   }
   
   public function testCheckPath() {

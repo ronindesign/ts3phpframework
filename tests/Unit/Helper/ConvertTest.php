@@ -135,26 +135,32 @@ class ConvertTest extends TestCase
   
   public function testConvertCodecIDToHumanReadable() {
     // @todo: Find logical / comprehensive test for checking codec names
+    $this->markTestIncomplete();
   }
   
   public function testConvertGroupTypeIDToHumanReadable() {
     // @todo: Find logical / comprehensive test for checking codec names
+    $this->markTestIncomplete();
   }
   
   public function testConvertPermTypeIDToHumanReadable() {
     // @todo: Find logical / comprehensive test for checking codec names
+    $this->markTestIncomplete();
   }
   
   public function testConvertPermCategoryIDToHumanReadable() {
     // @todo: Find logical / comprehensive test for checking codec names
+    $this->markTestIncomplete();
   }
   
   public function testConvertLogLevelIDToHumanReadable() {
     // @todo: Find logical / comprehensive test for checking codec names
+    $this->markTestIncomplete();
   }
   
   public function testConvertLogEntryToArray() {
     // @todo: Implement matching integration test for testing real log entries
+    $this->markTestIncomplete();
     $mock_data = [
       '2017-06-26 21:55:30.307009|INFO    |Query         |   |query from 47 [::1]:62592 issued: login with account "serveradmin"(serveradmin)'
     ];
