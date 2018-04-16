@@ -30,10 +30,11 @@ class TeamSpeak3Test extends TestCase
   protected function setUp(
   )/* The :void return type declaration that should be here would cause a BC issue */ {
     parent::setUp();
-    if(!(static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD')))
-    {
-      throw new Exception('Integration tests require `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable be set, but was either not set or empty.');
-    }
+    static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD');
+    //if(!(static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD')))
+    //{
+    //  throw new Exception('Integration tests require `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable be set, but was either not set or empty.');
+    //}
   }
   
   public function testConstructorHost() {
