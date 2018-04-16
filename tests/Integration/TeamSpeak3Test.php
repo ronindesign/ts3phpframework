@@ -27,14 +27,13 @@ class TeamSpeak3Test extends TestCase
     'voice' => '9987'
   ];
   
-  protected function setUp(
-  )/* The :void return type declaration that should be here would cause a BC issue */ {
+  protected function setUp() {
     parent::setUp();
-    static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD');
-    //if(!(static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD')))
-    //{
-    //  throw new Exception('Integration tests require `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable be set, but was either not set or empty.');
-    //}
+    if(!(static::$PASSWORD = getenv('TS3_SERVERQUERY_ADMIN_PASSWORD')))
+    {
+      $this->markTestSkipped('Skipping integration tests. Required `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable empty or not set.');
+      throw new Exception('Integration tests require `TS3_SERVERQUERY_ADMIN_PASSWORD` environment variable be set, but was either not set or empty.');
+    }
   }
   
   public function testConstructorHost() {
