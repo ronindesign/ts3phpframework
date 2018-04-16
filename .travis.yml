@@ -39,9 +39,9 @@ before_install:
   - docker ps -a
   - docker logs $TS3_CONTAINER_NAME
   - TS3_SERVERQUERY_ADMIN_PASSWORD=$(docker logs $TS3_CONTAINER_NAME 2>&1 | sed -ne 's!.*password=[^"]*.\([^"]*\).*$!\1!p')
-  - echo "TS3 ServerQuery Password (parsed from log): $TS3_SERVERQUERY_ADMIN_PASSWORD"
+  - echo 'TS3 ServerQuery Password (parsed from log):' $TS3_SERVERQUERY_ADMIN_PASSWORD
   - TS3_WHITELIST_SRC_IP=$(docker inspect $TS3_CONTAINER_NAME --format '{{ .NetworkSettings.Gateway }}')
-  - echo "TS3 Network Gateway (client ip for whitelist): $TS3_WHITELIST_SRC_IP"
+  - echo 'TS3 Network Gateway (client ip for whitelist):' $TS3_WHITELIST_SRC_IP
   - docker exec -ti $TS3_CONTAINER_NAME sh -c "echo $TS3_WHITELIST_SRC_IP >> /var/ts3server/query_ip_whitelist.txt"
   - if [[ $TRAVIS_PHP_VERSION != hhvm && $TRAVIS_PHP_VERSION != nightly && $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini; fi
   - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then echo 'opcache.enable=1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
