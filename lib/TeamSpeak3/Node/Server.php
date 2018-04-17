@@ -170,6 +170,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
     $this->execute("channeldelete", array("cid" => $cid, "force" => $force));
     $this->channelListReset();
 
+    // @todo: Check if this should be `$this->getParent()->whoamiGet(...)`
     if(($cid instanceof TeamSpeak3_Node_Abstract ? $cid->getId() : $cid) == $this->whoamiGet("client_channel_id"))
     {
       $this->getParent()->whoamiReset();
