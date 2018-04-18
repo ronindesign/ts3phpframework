@@ -9,7 +9,7 @@ use PHPUnit\Framework\Exception;
 require_once 'lib/TeamSpeak3/TeamSpeak3.php';
 
 /**
- * Class ReplyTest
+ * Class TeamSpeak3Test
  *
  * Constants: S_... - Sample response for a command (raw formatting) from
  * server. E_... - Expected (parsed) response (i.e. from _Helper_String) from
