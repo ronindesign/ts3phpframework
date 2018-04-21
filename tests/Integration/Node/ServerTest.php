@@ -4,6 +4,7 @@ namespace Tests\Integration\Node;
 
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Constraint\IsType as PHPUnit_IsType;
+use \PHPUnit\Framework\Exception;
 
 require_once 'lib/TeamSpeak3/TeamSpeak3.php';
 
